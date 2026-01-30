@@ -1,0 +1,26 @@
+document.getElementById('upload-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const title = document.getElementById('video-title').value;
+    const file = document.getElementById('video-file').files[0];
+
+    if (title && file) {
+        const videoCard = document.createElement('div');
+        videoCard.className = 'video-card';
+
+        const videoImg = document.createElement('img');
+        videoImg.src = URL.createObjectURL(file);
+
+        const videoTitle = document.createElement('h3');
+        videoTitle.textContent = title;
+
+        videoCard.appendChild(videoImg);
+        videoCard.appendChild(videoTitle);
+
+        document.getElementById('video-list').appendChild(videoCard);
+
+        // Limpiar formulario
+        document.getElementById('video-title').value = '';
+        document.getElementById('video-file').value = '';
+    }
+});

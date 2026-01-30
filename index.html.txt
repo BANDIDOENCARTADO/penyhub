@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PornHub-like</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>PornHub-like</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Trending</a></li>
+                <li><a href="#">Popular</a></li>
+                <li><a href="#">Subir Video</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="video-list">
+            <!-- Aquí se mostrarán los videos -->
+        </section>
+
+        <section id="upload-section">
+            <h2>Subir Video</h2>
+            <form id="upload-form">
+                <input type="text" id="video-title" placeholder="Título del video" required>
+                <input type="file" id="video-file" accept="video/*" required>
+                <button type="submit">Subir Video</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 PornHub-like. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
