@@ -1,130 +1,119 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #111;
-    color: #fff;
+// Datos de categorías y subcategorías
+const categories = [
+    {
+        name: "Amor",
+        subcategories: ["Romántico", "Intimo"]
+    },
+    {
+        name: "Cristal",
+        subcategories: ["Blanco", "Negro"]
+    },
+    {
+        name: "Mamá",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Papá",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Tía",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Tío",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Niña",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Niño",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Gato",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Perro",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Mascota",
+        subcategories: ["Amor", "Cristal"]
+    },
+    {
+        name: "Otro",
+        subcategories: ["Amor", "Cristal"]
+    }
+];
+
+// Cargar categorías y subcategorías
+const categorySelect = document.getElementById("category-select");
+const subcategorySelect = document.getElementById("subcategory-select");
+
+function loadCategories() {
+    const categoryList = document.getElementById("category-list");
+    categoryList.innerHTML = "";
+
+    categories.forEach((cat, index) => {
+        const category = document.createElement("div");
+        category.className = "category";
+        category.textContent = cat.name;
+        category.dataset.index = index;
+        category.addEventListener("click", () => {
+            loadSubcategories(index);
+        });
+        categoryList.appendChild(category);
+    });
 }
 
-header {
-    background-color: #222;
-    padding: 10px 20px;
-    text-align: center;
+function loadSubcategories(categoryIndex) {
+    const subcategories = categories[categoryIndex].subcategories;
+    subcategorySelect.innerHTML = "";
+    subcategorySelect.disabled = false;
+
+    subcategories.forEach(subcat => {
+        const option = document.createElement("option");
+        option.value = subcat;
+        option.textContent = subcat;
+        subcategorySelect.appendChild(option);
+    });
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2em;
-}
+// Cargar categorías al cargar la página
+loadCategories();
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
+// Subir video
+document.getElementById("upload-form").addEventListener("submit", function (e) {
+    e.preventDefault();
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
+    const title = document.getElementById("video-title").value;
+    const file = document.getElementById("video-file").files[0];
+    const category = document.getElementById("category-select").value;
+    const subcategory = document.getElementById("subcategory-select").value;
 
-main {
-    padding: 20px;
-}
+    if (title && file && category && subcategory) {
+        const videoCard = document.createElement("div");
+        videoCard.className = "video-card";
 
-#categories {
-    margin-bottom: 30px;
-}
+        const videoImg = document.createElement("img");
+        videoImg.src = URL.createObjectURL(file);
 
-#category-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+        const videoTitle = document.createElement("h3");
+        videoTitle.textContent = title;
 
-.category {
-    background-color: #333;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        videoCard.appendChild(videoImg);
+        videoCard.appendChild(videoTitle);
 
-.category:hover {
-    background-color: #444;
-}
+        document.getElementById("video-list").appendChild(videoCard);
 
-#upload-section {
-    background-color: #222;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-}
-
-#upload-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#upload-form input[type="text"],
-#upload-form select {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #333;
-    color: #fff;
-}
-
-#upload-form button {
-    padding: 10px;
-    background-color: #ff4444;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#upload-form button:hover {
-    background-color: #cc0000;
-}
-
-#video-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.video-card {
-    background-color: #222;
-    border: 1px solid #444;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.video-card:hover {
-    transform: scale(1.02);
-}
-
-.video-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.video-card h3 {
-    padding: 10px;
-    font-size: 1.2em;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #111;
-    margin-top: 40px;
-}
+        // Limpiar formulario
+        document.getElementById("video-title").value = "";
+        document.getElementById("video-file").value = "";
+        document.getElementById("category-select").value = "";
+        document.getElementById("subcategory-select").value = "";
+    }
+});
