@@ -1,26 +1,130 @@
-document.getElementById('upload-form').addEventListener('submit', function (e) {
-    e.preventDefault();
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: #fff;
+}
 
-    const title = document.getElementById('video-title').value;
-    const file = document.getElementById('video-file').files[0];
+header {
+    background-color: #222;
+    padding: 10px 20px;
+    text-align: center;
+}
 
-    if (title && file) {
-        const videoCard = document.createElement('div');
-        videoCard.className = 'video-card';
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
 
-        const videoImg = document.createElement('img');
-        videoImg.src = URL.createObjectURL(file);
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
-        const videoTitle = document.createElement('h3');
-        videoTitle.textContent = title;
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        videoCard.appendChild(videoImg);
-        videoCard.appendChild(videoTitle);
+main {
+    padding: 20px;
+}
 
-        document.getElementById('video-list').appendChild(videoCard);
+#categories {
+    margin-bottom: 30px;
+}
 
-        // Limpiar formulario
-        document.getElementById('video-title').value = '';
-        document.getElementById('video-file').value = '';
-    }
-});
+#category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.category {
+    background-color: #333;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category:hover {
+    background-color: #444;
+}
+
+#upload-section {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+#upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#upload-form input[type="text"],
+#upload-form select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+#upload-form button {
+    padding: 10px;
+    background-color: #ff4444;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#upload-form button:hover {
+    background-color: #cc0000;
+}
+
+#video-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.video-card {
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.video-card:hover {
+    transform: scale(1.02);
+}
+
+.video-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.video-card h3 {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    margin-top: 40px;
+}
